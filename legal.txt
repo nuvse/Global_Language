@@ -1,0 +1,13 @@
+All cables core code is licenced under the MIT licence
+
+Some ops may be using code from contributors or external libraries under different licences.
+
+Additional code from contributors and libraries in this export are licenced as follows:
+
+Apache-2.0:
+
+- mediapipe by Google (https://developers.google.com/edge/mediapipe/solutions/guide)
+
+Apache:
+
+- mediapipe camera (https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js)

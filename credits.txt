@@ -1,0 +1,7 @@
+OP AUTHORS:
+
+- ops by cables user pandur (https://cables.gl/user/pandur)
+- mediapipe by Google (https://developers.google.com/edge/mediapipe/solutions/guide)
+- ops by cables user drzhw (https://cables.gl/user/drzhw)
+
+cables is built on open source software and community contributions, check https://cables.gl/support
