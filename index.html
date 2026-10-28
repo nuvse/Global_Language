@@ -1,11 +1,45 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Endangered Languages</title><link rel="stylesheet" href="style.css"></head>
-<body data-page="index.html"><main>
-<h1 data-i18n="title"></h1>
-<p class="lead" data-i18n="lead"></p>
-<iframe class="globe" src="globe.html" data-alt="globe_alt" loading="lazy"></iframe>
-<h2 data-i18n="legend" style="font-size:1.1rem"></h2>
-<ul class="legend" id="legend"></ul>
-<a class="btn" href="languages.html" data-i18n="all_langs"></a>
-</main><script src="app.js"></script></body></html>
+<title>LanguageGlobal</title><meta name="description" content="LanguageGlobal">
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="top"><a class="brand" href="#">LanguageGlobal</a>
+<nav><a href="#globe" data-i18n="nav_globe"></a><a href="#status" data-i18n="nav_status"></a><a href="#help" data-i18n="nav_help"></a><a href="#about" data-i18n="nav_about"></a></nav>
+<button id="lang" type="button" aria-label="Language"></button></header>
+
+<section class="hero"><canvas id="orb" aria-hidden="true"></canvas>
+<div class="wrap">
+<h1 data-i18n="h1"></h1>
+<p id="sub" data-i18n="sub"></p>
+<div class="cta"><a class="btn main" href="#globe" data-i18n="btn_explore"></a><a class="btn" href="#help" data-i18n="btn_help"></a></div>
+<div class="stats">
+<div class="stat"><b data-n="8301">0</b><span data-i18n="s1"></span></div>
+<div class="stat"><b data-n="4194">0</b><span data-i18n="s2"></span></div>
+<div class="stat"><b data-n="1179">0</b><span data-i18n="s3"></span></div>
+</div></div></section>
+
+<section id="globe"><iframe title="LanguageGlobal" data-src="globe.html" allow="camera; fullscreen" allowfullscreen></iframe></section>
+
+<section class="pad" id="status"><div class="wrap">
+<h2 data-i18n="nav_status"></h2>
+<div class="bar" id="bar"></div><ul class="leg" id="leg"></ul>
+</div></section>
+
+<section class="pad" id="help"><div class="wrap">
+<h2 data-i18n="nav_help"></h2>
+<div class="cards">
+<a class="card" href="https://www.endangeredlanguages.com" target="_blank" rel="noopener"><h3>Endangered Languages Project</h3><p data-i18n="o1"></p></a>
+<a class="card" href="https://wikitongues.org" target="_blank" rel="noopener"><h3>Wikitongues</h3><p data-i18n="o2"></p></a>
+<a class="card" href="https://livingtongues.org" target="_blank" rel="noopener"><h3>Living Tongues Institute</h3><p data-i18n="o3"></p></a>
+<a class="card" href="https://commonvoice.mozilla.org" target="_blank" rel="noopener"><h3>Mozilla Common Voice</h3><p data-i18n="o4"></p></a>
+<a class="card" href="https://en.wal.unesco.org" target="_blank" rel="noopener"><h3 data-i18n="o5t"></h3><p data-i18n="o5"></p></a>
+</div></div></section>
+
+<section class="pad" id="about"><div class="wrap">
+<h2 data-i18n="nav_about"></h2>
+<div class="about"><div><p data-i18n="ab1"></p><p data-i18n="ab2"></p></div>
+<div><p><span data-i18n="ab3"></span> <a href="credits.txt">credits</a>, <a href="legal.txt">legal</a>, <a href="LICENCE">LICENCE</a>.</p></div></div>
+</div></section>
+<footer>LanguageGlobal</footer>
+<script src="app.js"></script>
+</body></html>

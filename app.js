@@ -1,74 +1,80 @@
 const T={ru:{
-nav_home:"Глобус",nav_lang:"Языки",nav_act:"Что можно сделать",
-title:"Языки, которые исчезают",
-lead:"Многие из примерно 7000 языков мира находятся под угрозой исчезновения. Покрути глобус и посмотри, где они живут.",
-legend:"Статус уязвимости",
-st_vulnerable:"Уязвимый",st_definitely:"Под угрозой",st_severe:"В серьёзной опасности",st_critical:"На грани исчезновения",st_extinct:"Исчез",
-globe_alt:"Интерактивный глобус языков",globe_open:"Открыть глобус в отдельном окне",
-all_langs:"Все языки",
-l_title:"Языки",l_search:"Поиск по названию или региону",l_all:"Все статусы",
-l_count:"Найдено: ",l_none:"Ничего не найдено. Попробуй другой запрос.",l_sp:"Носителей: ",
-a_title:"Что можно сделать",
-a_lead:"Язык живёт, пока на нём говорят. Вот несколько способов помочь.",
-o1:"Endangered Languages Project",o1d:"Крупнейшая база данных об исчезающих языках: тексты, записи, описания.",
-o2:"Wikitongues",o2d:"Волонтёры записывают видео на сотнях языков мира. Можно смотреть и присоединяться.",
-o3:"Living Tongues Institute",o3d:"Исследует и документирует языки, которым грозит исчезновение.",
-o4:"Mozilla Common Voice",o4d:"Открытый проект по сбору голосов. Можно записать фразы и помочь малым языкам.",
-o5:"UNESCO: Atlas языков мира",o5d:"Официальный источник данных о статусе уязвимости языков.",
-rec_t:"Расскажи о своём языке",
-rec_d:"Говоришь на редком языке или знаешь, кто говорит? Пришли слово, фразу или запись, и мы добавим её на сайт.",
-rec_b:"Написать нам",
-foot:"Проект о языках мира и их сохранении"},
+nav_globe:"Глобус",nav_status:"Статусы",nav_help:"Что можно сделать",nav_about:"О проекте",
+h1:"Языки мира под угрозой",sub:"",
+btn_explore:"Исследовать глобус",btn_help:"Что можно сделать",
+s1:"языков",s2:"под угрозой",s3:"вымерших",
+k_safe:"Безопасный",k_vuln:"Уязвимый",k_def:"Точно под угрозой",k_sev:"Серьёзно под угрозой",k_crit:"Критически под угрозой",k_ext:"Вымерший",k_unk:"Нет данных",
+o1:"Крупнейшая база данных об исчезающих языках: тексты, записи, описания.",
+o2:"Волонтёры записывают видео на сотнях языков мира. Можно смотреть и присоединяться.",
+o3:"Исследует и документирует языки, которым грозит исчезновение.",
+o4:"Открытый проект по сбору голосов. Можно записать фразы и помочь малым языкам.",
+o5t:"UNESCO: Атлас языков мира",o5:"Официальный источник данных о статусе уязвимости языков.",
+ab1:"Данные о языках: Glottolog, UNESCO Atlas of the World’s Languages in Danger, Wikidata и Wikipedia.",
+ab2:"Глобус сделан в cables.gl. Управление рукой работает на MediaPipe от Google.",
+ab3:"Лицензии и благодарности авторам:"},
 en:{
-nav_home:"Globe",nav_lang:"Languages",nav_act:"What you can do",
-title:"Languages that are disappearing",
-lead:"Many of the world’s roughly 7,000 languages are at risk of disappearing. Spin the globe and see where they live.",
-legend:"Vulnerability status",
-st_vulnerable:"Vulnerable",st_definitely:"Definitely endangered",st_severe:"Severely endangered",st_critical:"Critically endangered",st_extinct:"Extinct",
-globe_alt:"Interactive globe of languages",globe_open:"Open the globe in a new window",
-all_langs:"All languages",
-l_title:"Languages",l_search:"Search by name or region",l_all:"All statuses",
-l_count:"Found: ",l_none:"Nothing found. Try another search.",l_sp:"Speakers: ",
-a_title:"What you can do",
-a_lead:"A language lives as long as people speak it. Here are a few ways to help.",
-o1:"Endangered Languages Project",o1d:"The largest database of endangered languages: texts, recordings, descriptions.",
-o2:"Wikitongues",o2d:"Volunteers record videos in hundreds of languages. You can watch and join in.",
-o3:"Living Tongues Institute",o3d:"Researches and documents languages facing extinction.",
-o4:"Mozilla Common Voice",o4d:"An open project collecting voices. Record phrases and help smaller languages.",
-o5:"UNESCO: Atlas of the World’s Languages in Danger",o5d:"The official source for language vulnerability status.",
-rec_t:"Tell us about your language",
-rec_d:"Do you speak a rare language or know someone who does? Send a word, a phrase or a recording and we’ll add it to the site.",
-rec_b:"Write to us",
-foot:"A project about the world’s languages and keeping them alive"}};
-const ST=["vulnerable","definitely","severe","critical","extinct"];
-let lang=(navigator.language||"").startsWith("ru")?"ru":"en";
-try{lang=localStorage.getItem("lang")||lang}catch(e){}
-const t=k=>T[lang][k]||k;
-const PAGES=[["index.html","nav_home"],["languages.html","nav_lang"],["act.html","nav_act"]];
-function shell(){
- const cur=document.body.dataset.page;
- document.body.insertAdjacentHTML("afterbegin",'<header><nav>'+PAGES.map(p=>`<a href="${p[0]}" data-i18n="${p[1]}"${p[0]==cur?' aria-current="page"':''}></a>`).join("")+'</nav><button id="lang" type="button"></button></header>');
- document.body.insertAdjacentHTML("beforeend",'<footer data-i18n="foot"></footer>');
- document.getElementById("lang").onclick=()=>{lang=lang=="ru"?"en":"ru";try{localStorage.setItem("lang",lang)}catch(e){}apply()};
- const l=document.getElementById("legend");
- if(l)l.innerHTML=ST.map(s=>`<li style="--c:var(--${s})" data-i18n="st_${s}"></li>`).join("");
- const f=document.getElementById("status");
- if(f)f.innerHTML='<option value="" data-i18n="l_all"></option>'+ST.map(s=>`<option value="${s}" data-i18n="st_${s}"></option>`).join("");
- ["q","status"].forEach(id=>{const e=document.getElementById(id);if(e)e.oninput=render});
-}
+nav_globe:"Globe",nav_status:"Statuses",nav_help:"How to help",nav_about:"About",
+h1:"The world’s languages at risk",sub:"",
+btn_explore:"Explore the globe",btn_help:"How to help",
+s1:"languages",s2:"endangered",s3:"extinct",
+k_safe:"Safe",k_vuln:"Vulnerable",k_def:"Definitely endangered",k_sev:"Severely endangered",k_crit:"Critically endangered",k_ext:"Extinct",k_unk:"No data",
+o1:"The largest database of endangered languages: texts, recordings, descriptions.",
+o2:"Volunteers record videos in hundreds of languages. You can watch and join in.",
+o3:"Researches and documents languages facing extinction.",
+o4:"An open project collecting voices. Record phrases and help smaller languages.",
+o5t:"UNESCO: Atlas of the World’s Languages in Danger",o5:"The official source for language vulnerability status.",
+ab1:"Language data: Glottolog, the UNESCO Atlas of the World’s Languages in Danger, Wikidata and Wikipedia.",
+ab2:"The globe is made in cables.gl. Hand control runs on Google’s MediaPipe.",
+ab3:"Licences and credits:"}};
+// Статусы: ключ, цвет, число языков в базе (из cables_data_enriched.json)
+const ST=[["safe",2749],["vuln",1696],["def",1464],["sev",591],["crit",443],["ext",1179],["unk",179]];
+const COL={safe:"#33d973",vuln:"#1a73ff",def:"#ffd126",sev:"#ff801a",crit:"#ff2633",ext:"#a673ff",unk:"#8c94a6"};
+let lang=(navigator.language||"").slice(0,2)==="ru"?"ru":"en";
+try{lang=new URLSearchParams(location.search).get("lang")||localStorage.getItem("lang")||lang}catch(e){}
+if(lang!=="en")lang="ru";
+const t=k=>T[lang][k];
+const fmt=n=>n.toLocaleString(lang);
+const frame=document.querySelector("#globe iframe");
+let loaded=false;
+function loadGlobe(){if(loaded)return;loaded=true;frame.src="globe.html?lang="+lang}
 function apply(){
  document.documentElement.lang=lang;
  document.querySelectorAll("[data-i18n]").forEach(e=>e.textContent=t(e.dataset.i18n));
- document.querySelectorAll("[data-ph]").forEach(e=>e.placeholder=t(e.dataset.ph));
- document.querySelectorAll("[data-alt]").forEach(e=>e.title=t(e.dataset.alt));
- document.getElementById("lang").textContent=lang=="ru"?"EN":"RU";
- render();
+ document.querySelectorAll("[data-n]").forEach(e=>{if(e.dataset.done)e.textContent=fmt(+e.dataset.n)});
+ document.getElementById("lang").textContent=lang==="ru"?"EN":"RU";
+ document.getElementById("bar").innerHTML=ST.map(([k,n])=>`<i style="--c:${COL[k]};--n:${n}" title="${t("k_"+k)}: ${fmt(n)}"></i>`).join("");
+ document.getElementById("leg").innerHTML=ST.map(([k,n])=>`<li style="--c:${COL[k]}"><b>${fmt(n)}</b><span>${t("k_"+k)}</span></li>`).join("");
+ if(loaded)frame.src="globe.html?lang="+lang;
 }
-function render(){
- const box=document.getElementById("list");if(!box||typeof LANGS=="undefined")return;
- const q=document.getElementById("q").value.toLowerCase(),s=document.getElementById("status").value;
- const r=LANGS.filter(x=>(!s||x.s==s)&&(!q||(x.n.en+x.n.ru+x.r.en+x.r.ru).toLowerCase().includes(q)));
- document.getElementById("count").textContent=t("l_count")+r.length;
- box.innerHTML=r.length?r.map(x=>`<article class="card" style="--c:var(--${x.s})"><h3>${x.n[lang]}</h3><p class="dot">${t("st_"+x.s)}</p><p>${x.r[lang]}</p><p>${t("l_sp")}${x.sp}</p></article>`).join(""):`<p>${t("l_none")}</p>`;
-}
-shell();apply();
+document.getElementById("lang").onclick=()=>{lang=lang==="ru"?"en":"ru";try{localStorage.setItem("lang",lang)}catch(e){}apply()};
+apply();
+// Счётчики: один раз при загрузке
+const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+document.querySelectorAll("[data-n]").forEach(e=>{
+ const to=+e.dataset.n,t0=performance.now(),d=still?1:1600;
+ (function f(now){const p=Math.min(1,(now-t0)/d),v=Math.round(to*(1-Math.pow(1-p,3)));e.textContent=fmt(v);if(p<1)requestAnimationFrame(f);else e.dataset.done=1})(t0);
+});
+// Глобус грузится, когда до него почти доскроллили
+new IntersectionObserver((es,o)=>{if(es.some(x=>x.isIntersecting)){loadGlobe();o.disconnect()}},{rootMargin:"700px"}).observe(document.getElementById("globe"));
+// Вращающийся шар из точек (доли цветов = доли статусов в базе)
+(function(){
+ const c=document.getElementById("orb"),x=c.getContext("2d"),N=1500,P=[],pool=[];
+ ST.forEach(([k,n])=>{for(let i=0;i<Math.round(n/ST.reduce((a,b)=>a+b[1],0)*N);i++)pool.push(COL[k])});
+ for(let i=0;i<N;i++){const y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),a=i*2.39996;P.push([Math.cos(a)*r,y,Math.sin(a)*r,pool[(i*7919)%pool.length]])}
+ let S,mx=0,my=0,tx=0,ty=0;
+ function size(){const d=devicePixelRatio||1,w=c.clientWidth;c.width=c.height=w*d;S=w*d}
+ addEventListener("resize",size);size();
+ addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5)*.6;ty=(e.clientY/innerHeight-.5)*.4});
+ function draw(ts){
+  mx+=(tx-mx)*.04;my+=(ty-my)*.04;
+  const a=still?.6:ts*.00009+mx,tilt=.38+my,ca=Math.cos(a),sa=Math.sin(a),ct=Math.cos(tilt),st=Math.sin(tilt),R=S*.45,h=S/2;
+  x.clearRect(0,0,S,S);
+  for(const p of P){
+   const X=p[0]*ca+p[2]*sa,Z0=-p[0]*sa+p[2]*ca,Y=p[1]*ct-Z0*st,Z=p[1]*st+Z0*ct,f=(Z+1)/2;
+   x.globalAlpha=.12+.88*f*f;x.fillStyle=p[3];
+   x.beginPath();x.arc(h+X*R,h+Y*R,(.8+1.9*f)*S/900,0,6.2832);x.fill();
+  }
+  if(!still)requestAnimationFrame(draw);
+ }
+ requestAnimationFrame(draw);
+})();
